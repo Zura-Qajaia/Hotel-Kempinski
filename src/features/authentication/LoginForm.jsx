@@ -1,41 +1,47 @@
-import { useState } from "react";
-import Button from "../../ui/Button";
-import Form from "../../ui/Form";
-import Input from "../../ui/Input";
-import FormRowVertical from "../../ui/FormRowVertical";
+import React, { useEffect, useState } from "react";
+import { useKindeAuth } from "@kinde-oss/kinde-auth-react";
+import Button from "./../../ui/Button";
+import Profile from "../../pages/Profile";
+const LoginForm = () => {
+  const { login, register, isLoading, isAuthenticated, user, logout } =
+    useKindeAuth();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  console.log(user);
+  console.log(isAuthenticated);
+  console.log(isLoading);
 
-function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleSubmit() {}
+  useEffect(() => {
+    if (isAuthenticated) {
+      setShowSuccessMessage(true);
+      const timer = setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [isAuthenticated]);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <FormRowVertical label="Email address">
-        <Input
-          type="email"
-          id="email"
-          // This makes this form better for password managers
-          autoComplete="username"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </FormRowVertical>
-      <FormRowVertical label="Password">
-        <Input
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </FormRowVertical>
-      <FormRowVertical>
-        <Button size="large">Login</Button>
-      </FormRowVertical>
-    </Form>
+    <>
+      {isLoading && <p>Loading...</p>}
+
+      {!isLoading && !isAuthenticated && (
+        <>
+          <Button onClick={register} type="button">
+            Register
+          </Button>
+          <Button onClick={login} type="button">
+            Log In
+          </Button>
+        </>
+      )}
+
+      {!isLoading && isAuthenticated && <Profile />}
+    </>
   );
-}
+};
+
+const Login = () => {
+  return <LoginButtons />;
+};
 
 export default LoginForm;

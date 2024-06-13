@@ -1,0 +1,38 @@
+:root {
+  /* default text color */
+  --color-background: var(--color-background); /* default background color */
+  /* default border color */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1); /* default box shadow */
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1); /* hover box shadow */
+}
+
+.selector {
+  margin: 1rem;
+}
+
+.selector label {
+  color: var(--color-text);
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+.selector select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid var(--color-border);
+  font-size: 16px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.room-card {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.room-card:hover {
+  box-shadow: var(--shadow-lg);
+}

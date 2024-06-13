@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { CgProfile } from "react-icons/cg";
 import {
-  HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
   HiOutlineHomeModern,
   HiOutlineUsers,
 } from "react-icons/hi2";
 
+import { useLanguage } from "../LanguageContext";
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -54,37 +55,38 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function MainNav() {
+  const { translations } = useLanguage();
   return (
     <nav>
       <NavList>
         <li>
           <StyledNavLink to="/dashboard">
             <HiOutlineHome />
-            <span>Home</span>
-          </StyledNavLink>
-        </li>
-        <li>
-          <StyledNavLink to="/bookings">
-            <HiOutlineCalendarDays />
-            <span>Bookings</span>
+            <span>{translations.home}</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/cabins">
             <HiOutlineHomeModern />
-            <span>Cabins</span>
+            <span>{translations.rooms}</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/users">
             <HiOutlineUsers />
-            <span>Users</span>
+            <span>{translations.users}</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/settings">
             <HiOutlineCog6Tooth />
-            <span>Settings</span>
+            <span>{translations.contactUs}</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/profile">
+            <CgProfile />
+            <span>{translations.Profile}</span>
           </StyledNavLink>
         </li>
       </NavList>
